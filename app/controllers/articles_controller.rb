@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
   include ArticlesHelper
 
+  before_filter :require_login, except: [:index, :show]
+
   def index
     @articles = Article.all
   end
@@ -37,7 +39,6 @@ class ArticlesController < ApplicationController
 
     redirect_to article_path(@article)
   end
-
 
   def destroy
     @article = Article.find(params[:id])
